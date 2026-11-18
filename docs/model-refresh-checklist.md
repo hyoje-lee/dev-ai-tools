@@ -47,6 +47,7 @@ Codex는 같은 절차를 `codex-config/home/AGENTS.md`, `config.toml`의 `devel
 
 - `~/.claude/cache/changelog.md`에서 직전 점검 버전 이후의 항목을 읽는다. 도구, 권한, 설정 키, skill frontmatter와 관련된 변경을 찾는다.
 - `claude-config/claude-diff-with-home`으로 추적본과 `~/.claude`가 같은지 확인한다. 다르면 지금 적용 중인 지침이 점검 대상과 다르다는 뜻이다.
+- Claude Code가 업데이트되면 [claude-config/README.md의 상태 표시줄 절](../claude-config/README.md#상태-표시줄)에 적힌 점검을 한다.
 - 대상 모델로 연 세션에서, 하네스가 준 지침 가운데 rules와 output style에 겹치거나 어긋나는 내용이 있는지 확인한다. 세션이 자기 지침을 읽고 보고한 내용은 관찰일 뿐이다. `claude-config/README.md`에 사실로 적을 내용은 이전처럼 바이너리 분석으로 확인한다.
 - 바이너리 분석은 `readlink -f "$(command -v claude)"`로 찾은 실행 파일에서 세 가지를 본다. 첫째는 내장 모델 목록에 적힌 모델별 `capabilities`(`lean_prompt`, `*_prompt_bundle`, `turn_updates` 등)다. 둘째는 `# Communicating with the user` 문자열 근처에서 답변 형식의 갈래를 고르는 코드다. 셋째는 서버가 내려 준 값이 그 선택을 바꾸는지이며, `~/.claude.json`의 `clientDataCacheSlots`와 `cachedGrowthBookFeatures`에서 확인한다. 함수 이름은 버전마다 바뀌므로 문자열로 찾는다.
 - 사용자가 `/doctor prompt-audit`을 실행한다. 이전 모델에 맞춰 쓴 표현을 CLAUDE.md, skill, agent, command에서 찾아 주는 Claude Code 명령이며, 에이전트가 직접 실행할 수 없다.

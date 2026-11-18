@@ -107,6 +107,12 @@
 
 ## 검증 이력
 
+### 2026-11-18 — Claude 상태 표시줄에 피어 주소와 줄 나눔 추가
+
+- **Claude 변경**: `home/statusline-command.sh`의 둘째 줄 끝에 세션 레지스트리(`~/.claude/sessions/*.json`의 `name`)에서 읽은 피어 주소를 `@이름`으로 붙이고, 첫 줄에는 status JSON의 `session_name` 제목만 둔다. 둘째 줄이 90자를 넘으면 비용 앞에서 줄을 나눈다. 2026-11-12에 넣은 rate limit의 `left` 표기는 뺐으며, 값은 계속 남은 비율이다. 업데이트 후 점검 항목은 `claude-config/README.md`의 상태 표시줄 절에 적었다.
+- **Codex 대응과 유지 사유**: `codex-config/home/config.toml`의 `[tui].status_line`에는 세션 제목에 해당하는 `thread-name`이 있고, 피어 주소에 해당하는 항목은 없다. Codex는 내장 항목을 직접 그리므로 줄 나눔과 표기 변경도 옮길 대상이 없다. Codex 설정은 그대로 둔다.
+- **검토 범위**: Claude 스크립트를 실제 transcript와 레지스트리로 렌더링해 확인했다. Codex 화면은 확인하지 않았다.
+
 ### 2026-11-14 — session-dashboard Claude 어댑터의 프로젝트 판정과 턴 상태 수정
 
 - **발견 경위**: 저장소 사본으로 실제 `~/.claude` 기록을 읽어 보니 합성 기록 테스트가 잡지 못한 결함이 두 개 있었다. 수정 대상은 Claude의 `scripts/source.py`와 `tests/session-dashboard-core.py`, `references/usage.md`이며, 공통 서버·UI 파일 4개는 변경하지 않았다.
